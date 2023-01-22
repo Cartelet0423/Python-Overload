@@ -46,3 +46,18 @@ Cell In [1], line 30, in overload.<locals>.fork(*args, **kwargs)
 
 NameError: name 'f(str, str)' is not defined
 ```
+```py
+class MyClass:
+    @overload
+    def __init__(self, a:str, b:int):
+        self.ab = (a, b)
+        
+    @overload
+    def __init__(self, a:int|float, b:int):
+        self.ab = a + b
+```
+```py
+MyClass("a", 1).ab # -> ("a", 1)
+MyClass(1, 2).ab # -> 3
+MyClass(1., 2).ab # -> 3.0
+```
